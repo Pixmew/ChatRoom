@@ -24,4 +24,4 @@ while True:
     print(msg)
     print(f"Connection from {address} has been Established!")
     #send updated message to client
-    clientsocket.send(msg.encode())
+    clientsocket.send(msg)
