@@ -1,5 +1,5 @@
 import socket
-import pickle
+import json
 
 #size of heder which stores length of message
 header = 10
@@ -16,12 +16,11 @@ serversocket.listen(5)
 #continously check of avalible of clients
 while True:
     #server connection message
-    msg = pickle.dumps(d)
+    msg = json.dumps(d)
     #accept all clients
     clientsocket,address = serversocket.accept()
     #concatnate the message with the size of msg in advanced
-    msg  = bytes("{:<{header}}".format(len(msg),header = header),"utf-8") + msg
-    print(msg)
+    msg  = "{:<{header}}".format(len(msg),header = header) + msg
     print(f"Connection from {address} has been Established!")
     #send updated message to client
-    clientsocket.send(msg)
+    clientsocket.send(msg.encode())
