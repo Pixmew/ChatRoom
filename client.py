@@ -22,5 +22,6 @@ while True:
     full_msg += msg
     #if full message is recived then print message
     if len(full_msg)-header == msg_size:
-        print(pickle.loads(full_msg))
+        d = pickle.loads(full_msg[header:])
+        print(d)
         newmsg = True
