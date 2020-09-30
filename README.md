@@ -2,7 +2,7 @@
 This repo contains scripts to support servers and client side handling for a ChatRoom
 
 --------------------------------------------------
-WHAT DID I LEARNED:
+#WHAT DID I LEARNED:
 --------------------------------------------------
 1.How to implement sockets module
 ----------------------------------------------
