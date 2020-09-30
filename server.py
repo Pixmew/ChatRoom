@@ -3,7 +3,7 @@ import pickle
 
 #size of heder which stores length of message
 header = 10
-d = " Connection aquired \n hello client"
+d = " Connection aquired\nhello client"
 #create the server of stream type in ip4 format
 serversocket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 ip = socket.gethostbyname("localHost")
