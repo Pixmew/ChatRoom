@@ -1,5 +1,5 @@
 import socket
-import pickel
+import pickle
 
 #size of heder which stores length of message
 header = 10
@@ -16,7 +16,7 @@ serversocket.listen(5)
 #continously check of avalible of clients
 while True:
     #server connection message
-    msg = pickel.dumps(d)
+    msg = pickle.dumps(d)
     #accept all clients
     clientsocket,address = serversocket.accept()
     #concatnate the message with the size of msg in advanced
