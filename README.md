@@ -1,6 +1,5 @@
 # ChatRoom
-This repo contains scripts to support servers and client side handling for a ChatRoom
-
+This repo contains scripts to support servers and client side handling for a ChatRoom  
 #It contains 3 Scripts
 
   **1.server.py  :        Which handels multiple users and is programmed to be server**
@@ -9,9 +8,8 @@ This repo contains scripts to support servers and client side handling for a Cha
   
   **3.ClientReciver.py :  This script is used by User to recieve messages from server(to See the Actual Chat)**
 
-ClientSender cannot see the they can only send messages to chat(Just for sending message)
-
-ClientReciver cannot send message they can only be used to recieve Chat message (see the Chat)
+ClientSender cannot see the they can only send messages to chat(Just for sending message)   
+ClientReciver cannot send message they can only be used to recieve Chat message (see the Chat)   
 
 #WHAT DID I LEARNED:
 ----------------------------------------------
