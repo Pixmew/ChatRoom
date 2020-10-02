@@ -1,7 +1,7 @@
 # ChatRoom
 This repo contains scripts to support servers and client side handling for a ChatRoom
 
-##It contains 3 Scripts
+#It contains 3 Scripts
 
   **1.server.py  :        Which handels multiple users and is programmed to be server**
   
