@@ -9,14 +9,9 @@ ClientSender cannot see the they can only send messages to chat(Just for sending
 ClientReciver cannot send message they can only be used to recieve Chat message (see the Chat)
 
 #WHAT DID I LEARNED:
---------------------------------------------------
-1.How to implement sockets module
 ----------------------------------------------
-2.How to use socket to connect to internet
-----------------------------------------------
-3.How to transfer data through internet
-----------------------------------------------
-4.Server side programming
-----------------------------------------------
-5.Client side programming
-----------------------------------------------
+1. How to implement sockets module 1
+1. How to use socket to connect to interne 2
+1. How to transfer data through internet 3
+1. Server side programming 4
+1. Client side programming 5
