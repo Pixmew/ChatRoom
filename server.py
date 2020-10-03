@@ -72,6 +72,7 @@ while True:
                 ipport = re.search(r"raddr=(\(.*\))" , info)
                 Intermidiatemsg["user"] = User[eval(ipport[1])]
                 Intermidiatemsg["message"] = msg
-                print(Intermidiatemsg)
+                msg_json = json.dumps(Intermidiatemsg)
+                msg = "{:<10}{}".format(str(len(msg_json)) , msg_json)
                 for seerClient in seerList:
-                    seerClient.send(json.dumps(Intermidiatemsg))
+                    seerClient.send(msg)
