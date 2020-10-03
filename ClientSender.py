@@ -1,5 +1,4 @@
 import socket
-import json
 
 header = 10
 #creates the socket connection
