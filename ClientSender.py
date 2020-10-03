@@ -11,7 +11,8 @@ s.send(Firstmsg.encode())
 while True:
     msg = input("{}  ->  ".format(User))
     msg_len = len(msg.strip())
-    if msg_len <= 0:
+    if msg_len == 0:
+        print("msg not sent")
         continue
     msg = "{:<10}{}".format(msg_len,msg)
     s.send(msg.encode())

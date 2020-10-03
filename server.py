@@ -29,12 +29,10 @@ Intermidiatemsg = {}
 def ReciveMessage(client_socket):
     try:
         msg = client_socket.recv(header)
-        print(msg)
         msg_len = int(msg.decode().strip())
         if not msg_len:
             return False
         msg = client_socket.recv(msg_len)
-        print(msg.decode())
     except:
         return False
     return {"Header":str(msg_len) , "Data":msg.decode()}
@@ -52,9 +50,7 @@ while True:
             client_socket , address = serversocket.accept()
             msg = ReciveMessage(client_socket)
             type = client_socket.recv(header)
-            print(type)
             type = type.decode().strip()
-            print(type)
             if type == "chat":
                 chatterList.append(client_socket)
                 User[address] = msg
@@ -62,17 +58,22 @@ while True:
                 seerList.append(client_socket)
                 User[address] = msg
 
-        else :
-            msg  = ReciveMessage(client_socket)
-            #checks if message is revcieved correctly
+            print(User)
+        else:
+            print("else part")
+            msg  = ReciveMessage(notified_client)
+            print(msg)
+                #checks if message is revcieved correctly
             if msg is False:
+                print("no")
                 continue
-            else:
-                info = str(client_socket)
-                ipport = re.search(r"raddr=(\(.*\))" , info)
-                Intermidiatemsg["user"] = User[eval(ipport[1])]
-                Intermidiatemsg["message"] = msg
-                msg_json = json.dumps(Intermidiatemsg)
-                msg = "{:<10}{}".format(str(len(msg_json)) , msg_json)
-                for seerClient in seerList:
-                    seerClient.send(msg)
+
+            info = str()
+            ipport = re.search(r"raddr=(\(.*\))" , info)
+            Intermidiatemsg["user"] = User[eval(ipport[1])]
+            Intermidiatemsg["message"] = msg
+            msg = "{:<10}{}".format(str(len(msg)) , Intermidiatemsg)
+            msg = json.dumps(msg)
+            for seerClient in seerList:
+                seerClient.send(msg)
+                print(msg)
