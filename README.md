@@ -18,3 +18,6 @@ ClientReciver cannot send message they can only be used to recieve Chat message 
 1. How to transfer data through internet
 1. Server side programming
 1. Client side programming
+
+Every one are allowed to contribute and improve the quality this chatroom
+---------------------------------------------
