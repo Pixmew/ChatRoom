@@ -1,6 +1,8 @@
 import socket
 import json
 import select
+import re
+
 
 #size of heder which stores length of message
 header = 10
@@ -56,5 +58,20 @@ while True:
             if type == "chat":
                 chatterList.append(client_socket)
                 User[address] = msg
-            print(chatterList)
-            print(User)
+            elif type == "seer":
+                seerList.append(client_socket)
+                User[address] = msg
+
+        else :
+            msg  = ReciveMessage(client_socket)
+            #checks if message is revcieved correctly
+            if msg is False:
+                continue
+            else:
+                info = str(client_socket)
+                ipport = re.search(r"raddr=(\(.*\))" , info)
+                Intermidiatemsg["user"] = User[eval(ipport[1])]
+                Intermidiatemsg["message"] = msg
+                print(Intermidiatemsg)
+                for seerClient in seerList:
+                    seerClient.send(json.dumps(Intermidiatemsg))
