@@ -10,4 +10,9 @@ User = input("Enter Your Name : ")
 Firstmsg = "{:<10}".format(len(User)) + User + "   chat   "
 s.send(Firstmsg.encode())
 while True:
-    pass
+    msg = input("{}  ->  ".format(User))
+    msg_len = len(msg.strip())
+    if msg_len <= 0:
+        continue
+    msg = "{:<10}{}".format(msg_len,msg)
+    s.send(msg.encode())
