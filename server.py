@@ -11,9 +11,10 @@ d = " Connection aquired, You are now Connected to Server As a Chatter/Message S
 serversocket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 serversocket.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
 ip = socket.gethostbyname("localHost")
-print("connect to : "+ str(ip))
+host = 3333
+print("connect to -->   Ip : "+ str(ip) + "  Host : " + str(host))
 #created server gets bind to ip and port
-serversocket.bind((ip,3333))
+serversocket.bind((ip,host))
 #sets que for sending and reciving data
 serversocket.listen(5)
 
@@ -57,23 +58,17 @@ while True:
             elif type == "seer":
                 seerList.append(client_socket)
                 User[address] = msg
-
-            print(User)
+            print(msg["Data"] + " is Connected as " + type)
         else:
-            print("else part")
             msg  = ReciveMessage(notified_client)
-            print(msg)
-                #checks if message is revcieved correctly
+            #checks if message is revcieved correctly
             if msg is False:
-                print("no")
                 continue
 
-            info = str()
+            info = str(notified_client)
             ipport = re.search(r"raddr=(\(.*\))" , info)
             Intermidiatemsg["user"] = User[eval(ipport[1])]
             Intermidiatemsg["message"] = msg
-            msg = "{:<10}{}".format(str(len(msg)) , Intermidiatemsg)
-            msg = json.dumps(msg)
+            msg = "{:<10}{}".format(len(str(Intermidiatemsg)) , Intermidiatemsg)
             for seerClient in seerList:
-                seerClient.send(msg)
-                print(msg)
+                seerClient.send(msg.encode())
