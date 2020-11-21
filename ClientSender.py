@@ -1,5 +1,6 @@
 import socket
 
+
 header = 10
 #creates the socket connection
 s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
