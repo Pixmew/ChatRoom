@@ -1,12 +1,12 @@
 import tkinter
 import Connections
+import server
 
 # Create a Main Window for GUI
 MainWindow = tkinter.Tk(className = "Chatroom")
 MainWindow.geometry("400x300")
 #Main Title menu bar
 menu = tkinter.Menu(MainWindow);MainWindow.config(menu = menu)
-
 
 #Creating Menu Elements
 ConnectionMenu = tkinter.Menu(menu)
@@ -17,6 +17,12 @@ menu.add_command(label = "Exit" , command = MainWindow.quit)
 
 ConnectionMenu.add_command(label = "Create" ,command = Connections.CreateServer)
 ConnectionMenu.add_command(label = "Join")
+
+message = tkinter.Message(MainWindow , text = "Enter Name (Not Optional)")
+message.config(bg = "lightgreen")
+message.pack()
+Box = tkinter.Entry(MainWindow)
+Box.pack()
 
 createButton = tkinter.Button(MainWindow , text = "Create" , activebackground = "#999" , command = Connections.CreateServer)
 createButton.pack()
