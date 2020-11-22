@@ -1,16 +1,22 @@
 import tkinter
-import server
+import Connections
 
 # Create a Main Window for GUI
 MainWindow = tkinter.Tk(className = "Chatroom")
-
-#function for Creat server
-def CreateServer():
-    ChatServer = server.Server()
-    ChatServer.serverCreate()
+#Main Title menu bar
+menu = tkinter.Menu(MainWindow);MainWindow.config(menu = menu)
 
 
-createButton = tkinter.Button(MainWindow , text = "Create" , activebackground = "#999" , command = CreateServer)
+#Creating Menu Elements
+ConnectionMenu = tkinter.Menu(menu)
+
+#adding menu elements
+menu.add_cascade(label = "Connection" , menu = ConnectionMenu)
+
+ConnectionMenu.add_command(label = "Create" ,command = Connections.CreateServer)
+
+
+createButton = tkinter.Button(MainWindow , text = "Create" , activebackground = "#999" , command = Connections.CreateServer)
 createButton.pack()
 
 joinButton = tkinter.Button(MainWindow , text = "Join" , activebackground = "#999")
