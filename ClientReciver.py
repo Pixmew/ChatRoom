@@ -1,12 +1,14 @@
 import socket
 import json
 
-header = 10
 #creates the socket connection
 s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 #connects the sockets to designeted ip and port
-server = ("localHost",3333)
+server = (ip,host)
 s.connect(server)
+
+
+header = 10
 User = input("Enter Your Name : ")
 Firstmsg = "{:<10}".format(len(User)) + User + "   seer   "
 s.send(Firstmsg.encode())

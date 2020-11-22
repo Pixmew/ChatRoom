@@ -3,8 +3,9 @@ import json
 import select
 import re
 import random
+import threading
 
-class Server():
+class Server(threading.Thread):
 
     chatterList = []
     seerList = []
@@ -74,6 +75,6 @@ class Server():
                     for seerClient in self.seerList:
                         seerClient.send(msg.encode())
 
-    def serverCreate(self):
+    def run(self):
         self.InitializeServer()
         self.startServer()
