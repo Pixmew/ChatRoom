@@ -3,15 +3,16 @@ import socket
 class Client():
     header = None
     s = None
-    User = ""
-    def __init__():
+    user = ""
+    def __init__(self ,ip , host , name):
         self.header = 10
+        user = name
         #creates the socket connection
         self.s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         #connects the sockets to designeted ip and port
-        self.s.connect(("localHost",ip))
-        self.User = input("Enter Your Name : ")
-        Firstmsg = "{:<10}".format(len(User)) + User + "   chat   "
+        self.s.connect((socket.gethostname(),int(host)))
+        print(socket.gethostname())
+        Firstmsg = "{:<10}".format(len(user)) + user + "   chat   "
         self.s.send(Firstmsg.encode())
 
     def msgReciver():
@@ -36,5 +37,5 @@ class Client():
             if msg_len == 0:
                 print("msg not sent")
                 continue
-            msg = "{:<10}{} : {}".format((msg_len+len(User) + 3),User,msg)
+            msg = "{:<10}{} : {}".format((msg_len+len(user) + 3),user,msg)
             s.send(msg.encode())
