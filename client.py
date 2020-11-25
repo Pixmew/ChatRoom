@@ -10,7 +10,7 @@ class Client():
         #creates the socket connection
         self.s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         #connects the sockets to designeted ip and port
-        self.s.connect((socket.gethostname(),int(host)))
+        self.s.connect((ip,int(host)))
         print(socket.gethostname())
         Firstmsg = "{:<10}".format(len(user)) + user + "   chat   "
         self.s.send(Firstmsg.encode())

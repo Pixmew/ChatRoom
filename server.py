@@ -11,27 +11,28 @@ class Server(threading.Thread):
     seerList = []
     User = {}
     Intermidiatemsg = {}
+    serversocket = None
+    #size of heder which stores length of message
+    header = 10
+    d = " Connection aquired, You are now Connected to Server As a Chatter/Message Sender"
 
     def InitializeServer(self):
-        #size of heder which stores length of message
-        header = 10
-        d = " Connection aquired, You are now Connected to Server As a Chatter/Message Sender"
-
         #create the server of stream type in ip4 format
-        serversocket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        serversocket.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
+        self.serversocket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+        self.serversocket.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
         ip = socket.gethostbyname("localHost")
         port = random.randint(2000,9999)
         print("connect to -->   Ip : "+ str(ip) + "  Host : " + str(port))
         #created server gets bind to ip and port
-        serversocket.bind((ip,port))
+        self.serversocket.bind((ip,port))
         #sets que for sending and reciving data
-        serversocket.listen(5)
+        self.serversocket.listen(5)
+        self.chatterList.append(self.serversocket)
 
     #Function which recieve msg from client and parse it
-    def ReciveMessage(client_socket):
+    def ReciveMessage(self,client_socket):
         try:
-            msg = client_socket.recv(header)
+            msg = client_socket.recv(self.header)
             msg_len = int(msg.decode().strip())
             if not msg_len:
                 return False
@@ -49,10 +50,10 @@ class Server(threading.Thread):
             for notified_client in client_server:
 
                 #If there are any new connection accept that connection
-                if notified_client == serversocket:
-                    client_socket , address = serversocket.accept()
-                    msg = ReciveMessage(client_socket)
-                    type = client_socket.recv(header)
+                if notified_client == self.serversocket:
+                    client_socket , address = self.serversocket.accept()
+                    msg = self.ReciveMessage(client_socket)
+                    type = client_socket.recv(self.header)
                     type = type.decode().strip()
                     if type == "chat":
                         self.chatterList.append(client_socket)
@@ -62,7 +63,7 @@ class Server(threading.Thread):
                         self.User[address] = msg
                     print(msg["Data"] + " is Connected as " + type)
                 else:
-                    msg  = ReciveMessage(notified_client)
+                    msg  = self.ReciveMessage(notified_client)
                     #checks if message is revcieved correctly
                     if msg is False:
                         continue
