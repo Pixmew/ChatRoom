@@ -1,4 +1,5 @@
 import socket
+import threading
 
 class Client():
     header = None
@@ -15,7 +16,9 @@ class Client():
         Firstmsg = "{:<10}".format(len(user)) + user + "   chat   "
         self.s.send(Firstmsg.encode())
 
-    def msgReciver():
+class ClientReciver(threading.Thread):
+
+    def run():
         while True:
             msg = s.recv(header)
             if msg == False:
@@ -29,8 +32,8 @@ class Client():
                 print(msg_dict["user"]["Data"] + "  --->\n\n" + msg_dict["message"]["Data"])
                 print("-"*30)
 
-
-    def MsgSender():
+class ClientSender(threading.Thread):
+    def run():
         while True:
             msg = input("{}  ->  ".format(User))
             msg_len = len(msg.strip())
