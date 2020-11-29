@@ -14,15 +14,15 @@ class Server(threading.Thread):
     serversocket = None
     #size of heder which stores length of message
     header = 10
-    d = " Connection aquired, You are now Connected to Server As a Chatter/Message Sender"
+    d = "New Connection aquired : "
 
     def InitializeServer(self):
+        ip = socket.gethostbyname(socket.gethostname())
         #create the server of stream type in ip4 format
         self.serversocket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         self.serversocket.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
-        ip = socket.gethostbyname("localHost")
         port = random.randint(2000,9999)
-        print("connect to -->   Ip : "+ str(ip) + "  Host : " + str(port))
+        print("Server is now Started\nconnect to -->   Ip : "+ str(ip) + "  Host : " + str(port))
         #created server gets bind to ip and port
         self.serversocket.bind((ip,port))
         #sets que for sending and reciving data
@@ -61,7 +61,7 @@ class Server(threading.Thread):
                     elif type == "seer":
                         self.seerList.append(client_socket)
                         self.User[address] = msg
-                    print(msg["Data"] + " is Connected as " + type)
+                    print(d + msg["Data"])
                 else:
                     msg  = self.ReciveMessage(notified_client)
                     #checks if message is revcieved correctly
