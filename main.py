@@ -2,9 +2,7 @@ import tkinter
 import server
 import client
 import threading
-import sys
-import subprocess
-import re
+
 
 # Create a Main Window for GUI
 MainWindow = tkinter.Tk(className = "Chatroom menu")
@@ -13,19 +11,9 @@ MainWindow.geometry("600x300")
 menu = tkinter.Menu(MainWindow);MainWindow.config(menu = menu)
 clients = None
 Name,Ip,Port = None,None,None
-serverip = None
 
-if sys.platform.startswith("linu",):
-    subprocess.run(["ifconfig" ,"|","touch", "ip.txt"])
-elif sys.platform.startswith("win" , IGNORECASE = True):
-    subprocess.run(["ipconfig" , ">" , "ip.txt"])
 
-#serverop = re.search(r"inet (\d+.\d+.\d+.\d)" , open("ip.txt" , "r").read())
 
-#Buttons functions
-def serverCreate():
-    chatServer = server.Server()
-    chatServer.start()
 
 def joinServer():
     clients = client.Client(Ip.get() , Port.get() , Name.get())
@@ -35,7 +23,7 @@ def joinServer():
     textCons.place(relheight =0.745 , rely = 0.08 , relwidth = 1)
     labelBottom = tkinter.Label(clientWindow ,height = 80)
     labelBottom.place(relwidth = 1, rely = 0.825)
-    entryMsg = tkinter.Entry(labelBottom)
+    entryMsg = tkinter.Entry(labelBottom,bg = "#2C3E50", fg = "#EAECEE",font = "Helvetica 13")
     entryMsg.place(relwidth = 0.74,relheight = 0.06, rely = 0.008, relx = 0.011)
     entryMsg.focus()
     def sendmessage():
@@ -44,6 +32,7 @@ def joinServer():
         else:
             clients.sendMsg(entryMsg.get())
             entryMsg.delete(0, 'end')
+            textCons.see(tkinter.END)
 
     def chatshow():
         while True:
@@ -66,10 +55,23 @@ def joinServer():
 #Creating Menu Elements
 ConnectionMenu = tkinter.Menu(menu)
 #adding menu elements
+
+#Buttons functions
+def serverCreate():
+    chatServer = server.Server()
+    chatServer.start()
+    message = tkinter.Message(MainWindow , text = "Connect_to :" , width = 100)
+    message.place(x = 370,y = 50)
+    message1 = tkinter.Message(MainWindow , text = "Server IP : {}".format(chatServer.ip) , width = 150)
+    message1.place(x = 370,y = 90)
+    message2 = tkinter.Message(MainWindow , text = "Port : {}".format(chatServer.port) , width = 100)
+    message2.place(x = 370,y = 120)
+    
 menu.add_cascade(label = "Connection" , menu = ConnectionMenu)
 menu.add_command(label = "Exit" , command = MainWindow.quit)
 ConnectionMenu.add_command(label = "Create" , command = serverCreate)
 ConnectionMenu.add_command(label = "Join" , command = joinServer)
+
 
 createButton = tkinter.Button(MainWindow , text = "Create Server" , command = serverCreate)
 createButton.place(x = 370 , y = 190)
