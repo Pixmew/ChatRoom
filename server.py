@@ -24,7 +24,7 @@ class Server(threading.Thread):
         port = random.randint(2000,9999)
         print("Server is now Started\nconnect to -->   Ip : "+ str(ip) + "  Host : " + str(port))
         #created server gets bind to ip and port
-        self.serversocket.bind((ip,port))
+        self.serversocket.bind(('',port))
         #sets que for sending and reciving data
         self.serversocket.listen(5)
         self.chatterList.append(self.serversocket)

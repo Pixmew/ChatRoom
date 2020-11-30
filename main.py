@@ -2,6 +2,9 @@ import tkinter
 import server
 import client
 import threading
+import sys
+import subprocess
+import re
 
 # Create a Main Window for GUI
 MainWindow = tkinter.Tk(className = "Chatroom menu")
@@ -10,8 +13,14 @@ MainWindow.geometry("600x300")
 menu = tkinter.Menu(MainWindow);MainWindow.config(menu = menu)
 clients = None
 Name,Ip,Port = None,None,None
+serverip = None
 
+if sys.platform.startswith("linu",):
+    subprocess.run(["ifconfig" ,"|","touch", "ip.txt"])
+elif sys.platform.startswith("win" , IGNORECASE = True):
+    subprocess.run(["ipconfig" , ">" , "ip.txt"])
 
+#serverop = re.search(r"inet (\d+.\d+.\d+.\d)" , open("ip.txt" , "r").read())
 
 #Buttons functions
 def serverCreate():
