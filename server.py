@@ -58,10 +58,7 @@ class Server(threading.Thread):
                     if type == "chat":
                         self.chatterList.append(client_socket)
                         self.User[address] = msg
-                    elif type == "seer":
-                        self.seerList.append(client_socket)
-                        self.User[address] = msg
-                    print(d + msg["Data"])
+                    print(self.d + msg["Data"])
                 else:
                     msg  = self.ReciveMessage(notified_client)
                     #checks if message is revcieved correctly
@@ -73,8 +70,14 @@ class Server(threading.Thread):
                     self.Intermidiatemsg["user"] = self.User[eval(ipport[1])]
                     self.Intermidiatemsg["message"] = msg
                     msg = "{:<10}{}".format(len(str(self.Intermidiatemsg)) , self.Intermidiatemsg)
-                    for seerClient in self.seerList:
-                        seerClient.send(msg.encode())
+                    for c in self.chatterList:
+                        if c == self.serversocket:
+                            continue
+                        c.send(msg.encode())
+            for false_clients in client_exception:
+                print(fa)
+                false_clients.close()
+
 
     def run(self):
         self.InitializeServer()
